@@ -1,4 +1,4 @@
-# Leafwise book recommender
+# Book recommender System
 
 A Flask web app based book recommender project. Pick a book from the catalogue and the app recommends titles that were liked by readers with similar preferences.
 

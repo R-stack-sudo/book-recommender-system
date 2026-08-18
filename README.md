@@ -1,6 +1,6 @@
 # Leafwise book recommender
 
-A Flask web app based on the CampusX collaborative-filtering book recommender project. Pick a book from the catalogue and the app recommends titles that were liked by readers with similar preferences.
+A Flask web app based book recommender project. Pick a book from the catalogue and the app recommends titles that were liked by readers with similar preferences.
 
 ## Run locally
 

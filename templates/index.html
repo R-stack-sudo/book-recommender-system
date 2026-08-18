@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Popular books · Leafwise{% endblock %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">Reader-powered discovery</p>
+  <h1>Books worth<br><em>getting lost in.</em></h1>
+  <p class="hero-copy">Start with the titles readers return to again and again, then let shared reading tastes guide what comes next.</p>
+  <a class="button" href="{{ url_for('recommend_page') }}">Get a personal recommendation <span>→</span></a>
+</section>
+<section class="catalogue" aria-labelledby="popular-heading">
+  <div class="section-heading"><div><p class="eyebrow">The community shelf</p><h2 id="popular-heading">Most popular books</h2></div><p>Top 50, ranked by reader ratings.</p></div>
+  <div class="book-grid">
+    {% for book in popular_books %}
+    <article class="book-card">
+      <div class="cover-wrap"><img src="{{ book.image }}" alt="Cover of {{ book.title }}" loading="lazy" onerror="this.parentElement.classList.add('cover-missing')"></div>
+      <div class="book-details"><h3>{{ book.title }}</h3><p class="author">{{ book.author }}</p><div class="metrics"><span>★ {{ book.rating }}</span><span>{{ '{:,}'.format(book.ratings) }} ratings</span></div></div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

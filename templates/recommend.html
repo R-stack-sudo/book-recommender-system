@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Find your next read · Leafwise{% endblock %}
+{% block content %}
+<section class="recommend-hero">
+  <p class="eyebrow">Collaborative filtering</p>
+  <h1>What did you<br><em>love reading?</em></h1>
+  <p>Choose a book you enjoyed. We’ll surface books liked by readers with similar taste.</p>
+  <form class="search-form" action="{{ url_for('recommend_books') }}" method="post">
+    <label for="book-search">A book from the catalogue</label>
+    <div class="search-row"><input id="book-search" name="user_input" list="book-titles" value="{{ submitted_title or '' }}" placeholder="Start typing a title…" autocomplete="off" required><button type="submit">Recommend <span>→</span></button></div>
+    <datalist id="book-titles">{% for title in titles %}<option value="{{ title }}">{% endfor %}</datalist>
+  </form>
+  {% if error %}<p class="notice" role="alert">{{ error }}</p>{% endif %}
+</section>
+{% if recommendations %}
+<section class="catalogue recommendation-results" aria-labelledby="result-heading">
+  <div class="section-heading"><div><p class="eyebrow">Because you enjoyed {{ submitted_title }}</p><h2 id="result-heading">Try these next</h2></div><p>Ranked by shared reader preferences.</p></div>
+  <div class="book-grid">
+    {% for book in recommendations %}
+    <article class="book-card recommendation-card">
+      <div class="cover-wrap"><img src="{{ book.image }}" alt="Cover of {{ book.title }}" onerror="this.parentElement.classList.add('cover-missing')"></div>
+      <div class="book-details"><span class="match">{{ book.score }}% taste match</span><h3>{{ book.title }}</h3><p class="author">{{ book.author }}</p></div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}
